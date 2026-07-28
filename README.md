@@ -90,4 +90,80 @@ flowchart TD
     M --> N
     N --> O
     O --> P
+---
+
+📦 1. Build Docker Images
+---
+
+FrontEnd
+
+docker build -t aks-demo-frontend:v1 .
+docker tag aks-demo-frontend:v1 aksdemoacr8.azurecr.io/aks-demo-frontend:v1
+docker push aksdemoacr8.azurecr.io/aks-demo-frontend:v1
+
+---
+API 
+
+docker build -t aks-demo-api:v1 .
+docker tag aks-demo-api:v1 aksdemoacr8.azurecr.io/aks-demo-api:v1
+docker push aksdemoacr8.azurecr.io/aks-demo-api:v1
+
+---
+
+🗄️ 2. Create Azure Container Registry (ACR)
+
+az acr create \
+  --resource-group order_manager \
+  --name aksdemoacr8 \
+  --sku Basic
+
+---
+
+Login:
+  az acr login --name aksdemoacr8
+Verify images:
+az acr repository list --name aksdemoacr8 -o table
+
+---
+
+☸️ 3. Create AKS Cluster
+
+az aks create \
+  --resource-group order_manager \
+  --name aksdemo-cluster \
+  --node-count 1 \
+  --generate-ssh-keys \
+  --attach-acr aksdemoacr8
+
+---
+
+Connect
+az aks get-credentials \
+  --resource-group order_manager \
+  --name aksdemo-cluster
+
+---
+
+📂 4. Create K8s/ dir and yaml files 
+
+---
+
+🌐 5. Install NGINX Ingress Controller
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
+---
+
+🚦 6. Ingress Routing
+Your ingress routes:
+
+/ → frontend service
+
+/api → API service
+
+---
+
+🔍 7. Test the Deployment
+
+kubectl get ingress
 
