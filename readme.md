@@ -1,3 +1,8 @@
+
+📊 Architecture Diagram
+
+---
+
 flowchart TD
 
     subgraph Client
@@ -41,6 +46,8 @@ flowchart TD
 
 
 ---
+
+🔄 CI/CD Flow Diagram
 
 flowchart LR
 
@@ -451,6 +458,36 @@ Clean path‑based routing (/ → frontend, /api → backend)
                           │ Nodepool: 1 node              │
                           └──────────────────────────────┘
 
+
+---
+
+🧭 9. Folder Structure
+
+aks-demo-janelle/
+│
+├── api/
+├── frontend/
+├── k8s/
+│   ├── api-deployment.yaml
+│   ├── api-service.yaml
+│   ├── frontend-deployment.yaml
+│   ├── frontend-service.yaml
+│   └── ingress.yaml
+│
+├── docker/
+│   ├── api.Dockerfile
+│   └── frontend.Dockerfile
+│
+└── README.md
+
+---
+
+🧹 10. Cleanup (to avoid Azure charges)
+
+az aks delete --resource-group order_manager --name aksdemo-cluster --yes
+az acr delete --resource-group order_manager --name aksdemoacr8 --yes
+# OR delete everything:
+az group delete --name order_manager --yes
 
 ---
 
