@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7fhyCpNU/1zdMJt8M3k2dxpHqxRR7MZl16b/eMyQOsQ=",
+  "Source": "AksDemo.Api",
+  "BasePath": "_content/AksDemo.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

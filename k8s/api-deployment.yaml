@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-demo-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aks-demo-api
+  template:
+    metadata:
+      labels:
+        app: aks-demo-api
+    spec:
+      containers:
+      - name: aks-demo-api
+        image: aksdemoacr8.azurecr.io/aks-demo-api:v1
+        ports:
+        - containerPort: 80
